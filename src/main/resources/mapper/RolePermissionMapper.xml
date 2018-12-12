@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssm.test.shiromybatis.dao.RolePermissionDao">
+    <select id="getRolePermission" resultType="com.ssm.test.shiromybatis.pojo.RolePermission">
+        select id id,
+               role_id roleId,
+               permission_id permissionId,
+               create_time createTime,
+               update_time updateTime
+        from role_permission
+        where id = #{id}
+        and delete_status = '1'
+    </select>
+
+    <select id="listRolePermission" resultType="com.ssm.test.shiromybatis.pojo.RolePermission">
+        select id id,
+               role_id roleId,
+               permission_id permissionId,
+               create_time createTime,
+               update_time updateTime
+        from role_permission
+        where delete_status = '1'
+    </select>
+
+    <insert id="addRolePermission" parameterType="com.ssm.test.shiromybatis.pojo.RolePermission">
+        insert into role_permission(role_id,permission_id)
+        values (#{roleId},#{permissionId})
+    </insert>
+
+    <update id="updateRolePermission" parameterType="com.ssm.test.shiromybatis.pojo.RolePermission">
+        update role_permission
+        set role_id = #{roleId},permission_id = #{permissionId},update_time = #{updateTime}
+        where id = #{id}
+        and delete_status = '1'
+    </update>
+
+    <update id="deleteRolePermission" parameterType="com.ssm.test.shiromybatis.pojo.RolePermission">
+        update role_permission
+        set delete_status = '2',update_time = #{updateTime}
+        where id = #{id}
+        and delete_status = '1'
+    </update>
+</mapper>

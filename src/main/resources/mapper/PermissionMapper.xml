@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssm.test.shiromybatis.dao.PermissionDao">
+    <select id="listPermission" resultType="com.ssm.test.shiromybatis.pojo.Permission">
+        select id, permissionCode, permissionName, menuCode, menuName, requiredPermission
+        from permission
+    </select>
+
+    <select id="getPermission" resultType="com.ssm.test.shiromybatis.pojo.Permission">
+        select  id, permissionCode, permissionName, menuCode, menuName, requiredPermission
+        from permission
+        where id = #{id}
+    </select>
+
+    <update id="updatePermission" parameterType="com.ssm.test.shiromybatis.pojo.Permission">
+        update permission set permissionCode=#{permissionCode},
+                              permissionName=#{permissionName},
+                              menuCode=#{menuCode},
+                              menuName=#{menuName},
+                              requiredPermission=#{requiredPermission},
+                              update_time = #{updateTime}
+        where id = #{id}
+    </update>
+
+    <insert id="addPermission" parameterType="com.ssm.test.shiromybatis.pojo.Permission">
+        insert into permission(permissonCode, permissionName,menuCode,menuName,requiredPermission)
+        values (#{permissionCode},#{permissionName},#{memuCode},#{menuName},#{requiredPermission})
+    </insert>
+</mapper>

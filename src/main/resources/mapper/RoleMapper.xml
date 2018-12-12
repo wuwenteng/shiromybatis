@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssm.test.shiromybatis.dao.RoleDao">
+    <select id="getRole" resultType="com.ssm.test.shiromybatis.pojo.Role">
+        select id, roleName
+        from role
+        where id = #{id}
+        and role.delete_status = '1'
+    </select>
+
+    <select id="getAllRole" resultType="com.ssm.test.shiromybatis.pojo.Role">
+        select id, roleName
+        from role
+        where role.delete_status = '1'
+    </select>
+
+    <insert id="addRole" parameterType="com.ssm.test.shiromybatis.pojo.Role">
+        insert into role(roleName)
+        values (#{roleName})
+    </insert>
+    
+    <update id="updateRole" parameterType="com.ssm.test.shiromybatis.pojo.Role">
+        update role set roleName = #{roleName},
+                        deleteStatus = #{deleteStatus},
+                        update_time = #{updateTime}
+        where id = #{id}
+        and role.delete_status = '1'
+    </update>
+    
+    <update id="deleteRole" parameterType="int">
+        update role
+        set delete_status = '2',update_time = #{updateTime}
+        where id = #{id}
+    </update>
+</mapper>

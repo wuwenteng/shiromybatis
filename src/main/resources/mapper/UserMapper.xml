@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssm.test.shiromybatis.dao.UserDao">
+
+    <select id="getUserById" parameterType="Integer" resultType="com.ssm.test.shiromybatis.pojo.User">
+        select id, username, password,nickname,role_id roleId
+        from user
+        where user.id = #{id}
+        and user.delete_status = '1'
+    </select>
+
+    <select id="getUserByUsername" resultType="com.ssm.test.shiromybatis.pojo.User">
+        select id, username, password,nickname,role_id roleId
+        from user
+        where user.username = #{username}
+          and user.delete_status = '1'
+    </select>
+
+    <select id="listUser" resultType="com.ssm.test.shiromybatis.pojo.User">
+        select id, username, password,nickname,role_id roleId
+        from user
+        where user.delete_status = '1'
+    </select>
+
+    <insert id="addUser" parameterType="com.ssm.test.shiromybatis.pojo.User">
+        insert into user(username, password, role_id)
+        values (#{username}, #{password}, #{roleId})
+    </insert>
+
+    <update id="updateUser" parameterType="com.ssm.test.shiromybatis.pojo.User">
+        update user set nickname = #{nickname},password=#{password},update_time = #{updateTime}
+        where id = #{id}
+    </update>
+
+     <update id="deleteUser" parameterType="int">
+         update user
+         set delete_status = '2',update_time = #{updateTime}
+         where id = #{id}
+     </update>
+</mapper>
